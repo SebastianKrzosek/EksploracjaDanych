@@ -1,0 +1,7 @@
+Celem zadania jest napisanie programu, który będzie wyznaczał miary jakości klasyfikacji dla problemu klasyfikacji do k klas na podstawie wprowadzonej przez użytkownika macierzy pomyłek.
+
+Program ma działać następująco:
+
+Zapytać użytkownika o liczbę k klas.
+Wyrysować macierz pomyłek o wymiarze (k+1)x(k+1) (1 wymiar na nagłówki kolumn i wierszy). W nagłówkach wierszy będą wartości rzeczywiste a kolumn przewidywane, ponumerowane od 1 do k. Macierz powinna mieć kxk aktywnych pól, w które użytkownik będzie wpisywał odpowiednie liczebności (liczby całkowite nieujemne), będące elementami macierzy pomyłek.
+Program na podstawie wprowadzonej macierzy wylicza ogólną trafność, a następnie dla każdej z k klas wyznacza podstawowe miary jakości klasyfikacji do tej klasy - trafność, czułość, swoistość.
