@@ -1,0 +1,12 @@
+Plik bank_marketing_training zawiera dane pochodzące z kampanii telemarketingu bezpośredniego przeprowadzonej przez jeden z portugalskich banków. Bank był zainteresowany czy klienci, z którymi się kontaktowano, zdecydowali się na założenie lokaty terminowej w banku. Plik zawiera 26 874 rekordy. Opis predyktorów jest dostępny na stronie https://archive.ics.uci.edu/ml/datasets/bank+marketing
+
+Zmienną celu jest response – odpowiedź.
+
+
+Ustaw jako ziarno generatora liczb losowych swój numer indeksu. Podziel dane losowo na zbiory (uczący, testowy).
+Zastanów się, które spośród zmiennych dostępnych w pliku będą predyktorami w tworzonym przez Ciebie modelu. Zapisz, które zmienne wybierzesz, a z których zrezygnujesz i dlaczego.
+Spośród metod: k-nn, CART, C4.5/C5.0, las losowy, MLP wybierz dwie i zbuduj przy ich pomocy modele klasyfikujące obserwacje ze względu na wartości zmiennej Response. Zwróć uwagę na konieczne założenia. Jeśli zauważasz jakieś problemy (np. przeuczenie modelu), popraw modele.
+Omów budowę otrzymanych modeli. Jeśli to możliwe, napisz, które predyktory modele uznały za najważniejsze.
+Oceń jakość modeli, licząc współczynniki (trafność, czułość i swoistość) na zbiorach testowym i uczącym (patrz: wykład). Narysuj krzywe ROC. Czy Twoje modele działają dobrze? Jeśli zauważasz jakieś problemy, omów je i napisz jak myślisz, czym mogą być spowodowane. Który z modeli jest lepszy?
+
+Jako rozwiązanie prześlij plik PDF, w którym znajdą się opis wykorzystanych algorytmów (wraz z podaniem ustawianych parametrów), otrzymane wyniki oraz stosowne komentarze. Załącz także pozostałe pliki (dane, komendy, raporty, wykresy itp.) w postaci archiwum ZIP.
