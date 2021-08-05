@@ -1,0 +1,10 @@
+Plik dane_testy.csv zawiera dane dotyczące uczniów amerykańskich szkół podstawowych. Zmienne Szkoła, Klasa i Uczeń służą do identyfikacji obserwacji. Wykorzystując pozostałe zmienne zbuduj model szacowania, w którym zmienną celu będzie wynik testu końcowego Post_test.
+
+Sprawdź poprawność danych.
+Ustaw jako ziarno generatora liczb losowych swój numer indeksu. Podziel dane losowo na zbiory (uczący, testowy).
+Spośród poznanych metod wybierz dwie i zbuduj przy ich pomocy modele szacujące wartości zmiennej Post_test. Jeśli zauważasz jakieś problemy (np. przeuczenie modelu), popraw go. Sprawdź wymagane założenia.
+Omów budowę otrzymanych modeli.
+Oceń jakość modeli, licząc MSE i MAE. Narysuj wykresy wartości przewidywanych względem obserwowanych. Czy Twoje modele działają dobrze? Jeśli zauważasz jakieś problemy, omów je i napisz jak myślisz, czym mogą być spowodowane.
+Oceń ważność zmiennych (o ile jest to możliiwe).
+
+Jako rozwiązanie prześlij raport w postaci pliku PDF, w którym znajdą się otrzymane wyniki oraz stosowne komentarze. Pozostałe pliki wynikowe zamieść w postaci archiwum ZIP.
