@@ -1,0 +1,92 @@
+ceny<-karp
+
+#Macierz korelacji
+my_data<-ceny[, c(2:13)]
+macierz_korel<- round(cor(my_data),2)
+print(round(macierz_korel, 2))
+
+#Macierz wykresow rozrzutow
+install.packages("car")
+library(car)
+windows(5,5)
+par(mar=c(4,4,1.5,0.2))
+pairs(~karp+ryz+maka+kurczak+kielbasa+jaja+maslo+olej+cukier+miod+kawa+herbata,data=ceny,
+      main="Macierz wykresow rozrzutow")
+
+#Najpierw model ze wszystkimi predykorami:
+#ryz,maka,kurczak,kielbasa,jaja,maslo,olej,cukier,miod,kawa,herbata 
+model<-lm(karp~ryz+maka+kurczak+kielbasa+jaja+maslo+olej+cukier+miod+kawa+herbata,data=ceny)
+#Wspolczynniki modelu regresji
+coef(model)
+#Podsumowanie modelu - wyswietlaja sie tez wspolczynniki i istotnosc tych wspolczynnikow
+#(widac, ktore sa nieistotne statystycznie)
+#Najwazniejsze predyktory to te z najmniejsza istotnoscia, czyli z najmniejszym Pr(>|t|).
+summary(model)
+
+install.packages("MASS")
+library(MASS)
+#Selekcja predyktorow - potrzebny pakiet MASS
+#Mozna uzyc "both", "backward", "forward"
+# dokumentacja: https://www.rdocumentation.org/packages/MASS/versions/7.3-53/topics/stepAIC
+step<-stepAIC(model,direction ="both",k=2)
+
+#Buduje nowy model w oparciu o najwazniejsze predyktory
+model_new<-lm(karp ~ maka + kielbasa + jaja + maslo + olej + miod + kawa + 
+              herbata,data=ceny)
+#Wpsolczynnik R^2 
+podsumowanie1<-summary(model_new)
+podsumowanie1$r.squared
+
+#Wspolczynniki modelu regresji
+coef(model_new)
+summary(model_new)
+
+# Wartosci reszt
+reszty<-resid(model_new)
+
+#Wykresy dla reszt
+windows(5,5)
+par(mar=c(4,4,0.2,0.2))
+plot(model_new,which=2,labels.id = names(residuals(model_new)))
+
+install.packages("stats")
+library(stats)
+#Test normalnosci dla reszt, jesli p-value>0.05, to mozna przyjac, ze maja rozklad normalny
+#Potrzebny pakiet stats
+shapiro.test(reszty)
+
+#Wykonujemy Durbin-Watson test - potrzebny pakiet car
+#H0 (null hypothesis): There is no correlation among the residuals.
+# Jest to test niezaleznosci dla reszt. Jesli p-value>0.05, to mozna przyjac, ze
+#reszty sa niezalezne
+durbinWatsonTest(model_new)
+
+#Na wykresie rozrzutu przedstawiono zaleznosc reszt standaryzowanych wzgledem 
+#standaryzowanych wartosci przewidywanych
+windows(5,5)
+par(mar=c(4,4,0.2,0.2))
+plot(scale(fitted(model_new)),rstandard(model_new),ylab="Standaryzowane reszty",xlab="Standaryzowane wartosci przewidywane")
+
+install.packages("MLmetrics")
+library(MLmetrics)
+MSE<-MSE(fitted(model_new), ceny$karp)
+Stand_blad_oszac<-sqrt(MSE)
+print(Stand_blad_oszac)
+
+
+#Model regresji z predyktorami miod+olej
+model2<-lm(karp~miod+olej,data=ceny)
+summary(model2)
+#Wpsolczynnik R^2 
+podsumowanie2<-summary(model2)
+podsumowanie2$r.squared
+
+#Trojwymiarowy wykres rozrzutu przedstawiajacy zaleznosc ceny karpia od ceny oleju i miodu
+#dodatkowo nakladamy plaszczyzne z modelu (karp~olej+miod)
+install.packages("scatterplot3d")
+library(scatterplot3d)
+windows(5,5)
+par(mar=c(4,4,0.2,0.2))
+s3d<-scatterplot3d(ceny$olej,ceny$miod,ceny$karp,xlab='Cena oleju',ylab='Cena miodu',zlab='Cena karpia', main="3D wykres rozrzutu")
+fit <- lm(karp ~ olej+miod,data=ceny)
+s3d$plane3d(fit)
