@@ -1,0 +1,8 @@
+1.Wczytaj do programu Pythona plik churn_pl_wybrane.csv
+
+2.Zmienna Rezygnacja jest zmienną ewaluacyjną (Nie bierzemy jej do grupowania).
+
+3.Zestandaryzuj zmienne.
+
+4.Wyróżnij grupy danych, budując sieć Kohonena o wymiarze 3x3. Scharakteryzuj otrzymane klastry. 
+Policz liczbę obserwacji w danych klastrze. Policz średnie dla każdej ze zmiennych użytych w modelu, w obrębie danej grupy.
