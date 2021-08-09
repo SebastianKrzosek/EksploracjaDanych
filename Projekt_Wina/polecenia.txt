@@ -1,0 +1,38 @@
+Plik winequality-red.csv zawiera dane o 1599 rodzajach czerwonego wina portugalskiego. Kolejne kolumny oznaczają:
+
+stała kwasowość,
+
+lotna kwasowość,
+
+kwas cytrynowy,
+
+cukier resztkowy,
+
+chlorki,
+
+wolny dwutlenek siarki,
+
+całkowity dwutlenek siarki,
+
+gęstość,
+
+pH,
+
+siarczany,
+
+alkohol,
+
+jakość (ocena od 0 do 10).
+
+Parametry 1-11 są oceniane na podstawie obiektywnych testów fizyko-chemicznych. Parametr 12 to ocena jakości wina dokonywana przez ekspertów. Ten parametr będzie traktowany jako zmienna celu.
+
+Wykonaj poniższe polecenia w dowolnie wybranym programie, a następnie przedstaw wyniki swoich analiz w postaci raportu.
+
+Oceń jakość danych, dokonaj niezbędnych korekt, jeśli to konieczne.
+Podziel dane na zbiór uczący i testowy, ustawiając swój numer indeksu jako ziarno generatora liczb losowych.
+Dla danych ze zbioru uczącego wykonaj eksploracyjną analizę danych. Zidentyfikuj, które spośród zmiennych 1-11 mogą mieć największy wpływ na ocenę jakości wina. Zbadaj, które zmienne są ze sobą skorelowane.
+Potraktuj ocenę jakości wina jako zmienną jakościową. Na zbiorze uczącym zbuduj dowolny model klasyfikacji i oceń jego jakość na zbiorze testowym. Wyznacz 3 miary jakości modelu: trafność, trafność z dopuszczalnym odstępstwem o 1 (tzn. uznajemy, że model dobrze przewidział jakąś wartość, jeśli odgadł właściwie jakość wina lub pomylił się o 1 w dół lub w górę) oraz średni błąd bezwzględny MAE
+Potraktuj ocenę jakości wina jako zmienną ilościową. Na zbiorze uczącym zbuduj dowolny model szacowania i oceń jego jakość na zbiorze testowym. Zaokrąglij przewidywane wartości oceny jakości wina do całości. Następnie wyznacz 3 miary jakości modelu: trafność, trafność z dopuszczalnym odstępstwem o 1 (tzn. uznajemy, że model dobrze przewidział jakąś wartość, jeśli odgadł właściwie jakość wina lub pomylił się o 1 w dół lub w górę) oraz średni błąd bezwzględny MAE. 
+Który ze zbudowanych modeli okazał się lepszy? Które ze zmiennych 1-11 mają największy wpływ na ocenę jakości wina? Czy potwierdza to Twoje obserwacje z punktu 3.?
+W oparciu o zmienne 1-11, korzystając z danych w zbiorze uczącym, podziel wina na grupy. Opisz profile otrzymanych grup. Następnie zastosuj uzyskany schemat grupowania do danych ze zbioru testowego. Sprawdź, czy podział na grupy ma związek z jakością wina.
+Prześlij raport w postaci pliku PDF oraz wszystkie pozostałe pliki w postaci archiwum ZIP. Raport powinien zawierać najważniejsze informacje o wykonanych analizach, w tym: wykorzystane oprogramowanie, sprawdzenie założeń używanych metod, wykorzystane algorytmy wraz z ustawieniami parametrów, najważniejsze wyniki analiz, wnioski. W archiwum ZIP powinien się znaleźć zbiór danych z podziałem na uczący i testowy, przewidzianymi wartościami zmiennej celu w modelu klasyfikacji i szacowania oraz podziałem na grupy.
