@@ -1,0 +1,74 @@
+telco<-dane_telco
+#Macierz korelacji
+dane<-subset(telco,select=c("longmon","tollmon","equipmon","cardmon","wiremon",
+                            "longten","tollten","equipten","cardten","wireten"))
+macierz_korel<- round(cor(dane),2)
+
+
+#Wykresy skrzynkowe i histogramy
+windows(5,5)
+par(mar=c(4,4,0.2,0.2))
+hist(telco$longmon)
+
+windows(5,5)
+par(mar=c(4,4,0.2,0.2))
+boxplot(telco$longmon)
+
+#Operacje na zmiennych ilosciowych i jakosciowych 
+Predyktory_ilosc<-subset(telco,select=c("longmon","tollmon","equipmon","cardmon","wiremon"))
+Predyktory_ilosc_ln<-scale(log(Predyktory_ilosc+1))
+
+Predyktory_jak<-subset(telco,select=c("multline","voice","pager","internet","callid",
+                                      "callwait","forward","confer","ebill"))
+Predyktory_jak_stand<-scale(Predyktory_jak)
+Predyktory<-cbind(Predyktory_ilosc_ln,Predyktory_jak_stand)
+
+#Histogram po przeksztalceniach
+windows(5,5)
+par(mar=c(4,4,0.2,0.2))
+hist(subset(Predyktory,select="longmon"))
+
+
+#Trojwymiarowy wykres rozrzutu
+#Mozna opcjonalnie ustawic opis osi
+install.packages("scatterplot3d")
+library(scatterplot3d)
+windows(5,5)
+par(mar=c(4,4,0.2,0.2))
+s3d<-scatterplot3d(subset(Predyktory,select="longmon"),subset(Predyktory,select="tollmon"),subset(Predyktory,select="equipmon"),main="3D wykres rozrzutu")
+
+
+install.packages("stats")
+library(stats)
+#Algorytm k-srednich, ustalajac najpierw k=3
+km<-kmeans(Predyktory,centers=3,iter.max = 300,nstart = 10,algorithm = "Lloyd")
+grupy<-as.factor(km$cluster)
+Grupa1<-Predyktory[which(grupy==1),]
+Grupa2<-Predyktory[which(grupy==2),]
+Grupa3<-Predyktory[which(grupy==3),]
+opis1<-summary(Grupa1)
+opis2<-summary(Grupa2)
+opis3<-summary(Grupa3)
+km$centers
+km$size
+
+
+#Algorytm k-srednich, ustalajac teraz k=4
+km_new<-kmeans(Predyktory,centers=4,iter.max = 300,nstart = 10,algorithm = "Lloyd")
+grupy_new<-as.factor(km_new$cluster)
+Grupa1_new<-Predyktory[which(grupy_new==1),]
+Grupa2_new<-Predyktory[which(grupy_new==2),]
+Grupa3_new<-Predyktory[which(grupy_new==3),]
+Grupa4_new<-Predyktory[which(grupy_new==4),]
+opis1_new<-summary(Grupa1_new)
+opis2_new<-summary(Grupa2_new)
+opis3_new<-summary(Grupa3_new)
+opis4_new<-summary(Grupa4_new)
+km_new$centers
+km_new$size
+
+#Histogram dla grupy1 (klastra1), gdzie suma pól slupków=1
+churn1<-telco$churn[which(grupy_new==1)]
+windows(5,5)
+par(mar=c(4,4,0.2,0.2))
+hist(churn1,freq = FALSE)
