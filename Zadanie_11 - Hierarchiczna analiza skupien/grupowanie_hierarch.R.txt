@@ -1,0 +1,39 @@
+ilosc<-ceny[,c(2:13)]
+ilosc_stand<-scale(x=ilosc)
+odleglosci <- dist(ilosc_stand, method = "euclidean")
+
+#Hierarchiczna analiza skupien - 
+#podziel lata na grupy w zaleznosci 
+#od przecietnych cen zywnosci
+library(cluster)
+grupy<-agnes(odleglosci,method = "average")
+
+windows(5,5)
+par(mar=c(4,4,1.5,0.2))
+plot(grupy,labels=ceny$rok,type = "rectangle", ylab = "Height",hang=-1)
+
+#Algorytm - 2 klastry na podstawie dendrogramu
+przydzial<-cutree(grupy, k = 2)
+zestawienie<-data.frame(ceny$rok,przydzial,ceny$bezrobocie,ceny$przyrost)
+
+# Hierarchiczna analiza skupien -  
+#podziel zywnosc na grupy produktow, 
+#ktorych ceny zachowuja sie podobnie
+cenyT<-t(ceny)
+colnames(cenyT) <-ceny$rok
+
+install.packages("amap")
+library(amap)
+odleglosci2<-Dist(as.data.frame(cenyT[2:13,]), method ="correlation")
+
+grupy2<-agnes(odleglosci2,method = "average")
+
+windows(5,5)
+par(mar=c(4,4,1.5,0.2))
+plot(grupy2,labels=c("ryz", "maka", "kurczak", "kielbasa", "jaja","maslo","olej","cukier","miod","kawa","herbata","karp")
+,type = "rectangle", ylab = "Height",hang=-1)
+
+#Algorytm - 3 klastry na podstawie dendrogramu
+przydzial2<-cutree(grupy2, k = 3)
+zestawienie2<-data.frame(rownames(cenyT[2:13,]),przydzial2)
+
